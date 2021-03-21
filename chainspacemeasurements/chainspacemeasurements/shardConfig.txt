@@ -1,0 +1,2 @@
+0 /home/ec2-user/workspace/byzcuit/chainspacecore/ChainSpaceClientConfig/shards/s0
+1 /home/ec2-user/workspace/byzcuit/chainspacecore/ChainSpaceClientConfig/shards/s1
