@@ -11,7 +11,7 @@ import random
 import sys
 
 # FIXME: How many shards
-numShards=5
+numShards=4
 
 # FIXME: How many transactions
 numTransactions=11850
@@ -128,7 +128,6 @@ def initOutputObjectCounter():
 
 def getNextInputObject(shardID):
 	global inputObjectCounter
-	print("shardId ------------------------------"+str(shardID))
 	nextObject = inputObjectCounter[shardID]
 	inputObjectCounter[shardID] += numShards
 	return nextObject
@@ -198,180 +197,252 @@ def genTransactionFile():
 	initInputObjectCounter()
 	initOutputObjectCounter()
 
-	inputShards = set()
-	outputShards = set()
 
+	if inputObjectMode == 5:
 
-	if inputObjectMode == 4:
+		allInput  = [] # List of lists
+		allOutput = [] # List of lists
+
 		with open(shardListPath, "r") as filestream:
 			for line in filestream:
-				currentline = line.split(",")
-				inputShardFromFile.append(int(currentline[0]))
-				inputShardFromFile.append(int(currentline[1]))
-				#print "len "+str(len(inputShardFromFile))
+				currentline = line.split(":")
+				inputs  = currentline[0]
+				outputs = currentline[1]
+				inputsList = []
+				outputsList = []
 
-	# Create / open file to write
-	#if outputObjectMode == 2:
-	#	fileName = path+"test_transactions_same.txt"
-	#elif outputObjectMode == 3:
-#		fileName = path+"test_transactions_different.txt"
-#	else:
-	fileName = path+"test_transactions.txt"
+				for elem in inputs.split(","):
+					inputsList.append(elem)
+				for elem in outputs.split(","):
+					outputsList.append(elem)
 
-	#print fileName
+				allInput.append(inputsList)
+				allOutput.append(outputsList)
 
-	outFile = open(fileName, "w")
+		# All input and oupu are stored in the file allInput/Output variables
 
-	#with open("shards.txt", "r") as filestream:
+		fileName = path+"test_transactions.txt"
 
-	# Write objects and their status to corresponding files
+		outFile = open(fileName, "w")
 
-	lastShard = 0
-	transactionxshardCounter = [None] * numShards
-	for i in range(numShards):
-		transactionxshardCounter[i] = 0
+		for i in range(numTransactions):
+			trans = ""
+			transactionID = getNextTransactionID()
+			trans = trans + str(transactionID) + "\t"
 
-	for i in range(numTransactions):
+			inputs  = allInput[i]
+			outputs = allOutput[i]
 
-		transactionID = getNextTransactionID()
+			for j in range(len(inputs)):
+				inputObj = getNextInputObject(int(inputs[j]))
+				trans = trans + str(inputObj)
+				if j != len(inputs)-1:
+					trans = trans + ";"
 
-		# Generate inputs (chosen from random shards)
-		inputs = ""
-		ins=[]
-		for j in range(numInputs):
-			delimiter = ";"
-			# don't put delimiter after the last input
-			if j == numInputs-1:
-				delimiter = ""
 
-			if inputObjectMode == 0:
-				inputShard = getRandomShard()
-			elif inputObjectMode == 2:
-				if j != 0:
-					inputShard = getSameShard(lastShard)
-				else:
-					inputShard = getRandomShard()
-			elif inputObjectMode == 3:
-				if j != 0:
-					inputShard = getDifferentShard(lastShard)
-				else:
-					inputShard = getRandomShard()
+			trans = trans + "\t"
 
-			elif inputObjectMode == 4:
-				inputShard = getInputShardFromFile()
-				ins.append(inputShard)
-			else:
-				inputShard = getNextShard()
+			for j in range(len(outputs)):
+				outputObj = getNextOutputObject(int(outputs[j]))
+				trans = trans + str(outputObj)
+				if j != len(outputs)-1:
+					trans = trans + ";"
 
-			inputs = inputs + str(getNextInputObject(inputShard)) + delimiter
-			inputShards.add(inputShard)
-			#print str(i+1)+" "+str(inputShard)+" "+str(lastShard)
+			trans = trans + "\n"
+			outFile.write(trans)
+		outFile.close()
 
-			lastShard = inputShard
 
-		# generate output objects
-        	outputs = ""
 
-		transactionxshardCounter[inputShard] = transactionxshardCounter[inputShard] +  1
 
-		if outputObjectMode != -1: # generate output objects randomly or sequentially
 
-			for j in range(numOutputs):
+
+
+
+
+
+
+
+
+
+	else:
+		inputShards = set()
+		outputShards = set()
+
+
+
+
+
+		if inputObjectMode == 4:
+			with open(shardListPath, "r") as filestream:
+				for line in filestream:
+					currentline = line.split(",")
+					inputShardFromFile.append(int(currentline[0]))
+					inputShardFromFile.append(int(currentline[1]))
+					#print "len "+str(len(inputShardFromFile))
+
+		# Create / open file to write
+		#if outputObjectMode == 2:
+		#	fileName = path+"test_transactions_same.txt"
+		#elif outputObjectMode == 3:
+	#		fileName = path+"test_transactions_different.txt"
+	#	else:
+		fileName = path+"test_transactions.txt"
+
+		#print fileName
+
+		outFile = open(fileName, "w")
+
+		#with open("shards.txt", "r") as filestream:
+
+		# Write objects and their status to corresponding files
+
+		lastShard = 0
+		transactionxshardCounter = [None] * numShards
+		for i in range(numShards):
+			transactionxshardCounter[i] = 0
+
+		for i in range(numTransactions):
+
+			transactionID = getNextTransactionID()
+
+			# Generate inputs (chosen from random shards)
+			inputs = ""
+			ins=[]
+			for j in range(numInputs):
 				delimiter = ";"
-				#don't put delimiter after the last output
-				if j == numOutputs-1:
+				# don't put delimiter after the last input
+				if j == numInputs-1:
 					delimiter = ""
 
-				strOutput = ""
+				if inputObjectMode == 0:
+					inputShard = getRandomShard()
+				elif inputObjectMode == 2:
+					if j != 0:
+						inputShard = getSameShard(lastShard)
+					else:
+						inputShard = getRandomShard()
+				elif inputObjectMode == 3:
+					if j != 0:
+						inputShard = getDifferentShard(lastShard)
+					else:
+						inputShard = getRandomShard()
 
-                		# 0 for random output selection, and 1 for sequential
-				if outputObjectMode == 0:
-					outputShard = getRandomShard()
-					strOutput = str(getNextOutputObject(outputShard))
-				elif outputObjectMode == 2:
-					outputShard = getSameShard(inputShard)
-					strOutput = str(getNextOutputObject(outputShard))
-				elif outputObjectMode == 3:
-					outputShard = getDifferentShard(inputShard)
-					strOutput = str(getNextOutputObject(outputShard))
-				elif outputObjectMode == 4:
-					outputShard = getOutputShardFromFile(ins)
-					strOutput = str(getNextOutputObject(outputShard))
+				elif inputObjectMode == 4:
+					inputShard = getInputShardFromFile()
+					ins.append(inputShard)
 				else:
-					theObject = getNextOutputObjectSequential()
-					strOutput = str(theObject)
-					outputShard = mapObjectToShard(theObject)
+					inputShard = getNextShard()
 
-				outputShards.add(outputShard)
-				outputs = outputs + strOutput + delimiter
+				inputs = inputs + str(getNextInputObject(inputShard)) + delimiter
+				inputShards.add(inputShard)
+				#print str(i+1)+" "+str(inputShard)+" "+str(lastShard)
 
-                	if createDummyObjects == 1:
-                    		outputOnlyShards = outputShards - inputShards # shards that only occur in output
+				lastShard = inputShard
 
-                    		# Include dummy objects from all the outputOnly shards
-                    		counter = 0
-                    		for eachShard in outputOnlyShards: # add dummy objects to inputs for output-only shards
-                        		counter += 1
-                        		inputObject = getNextInputObject(eachShard)
-                        		inputs = inputs + ";" + str(inputObject)
+			# generate output objects
+	        	outputs = ""
 
-                # Bano: This is old code that used to sequentially pick outputs from shards
-		#	for k in range(numOutputs):
-		#		delimiter = ";"
-		#		# don't put delimiter after the last output
-		#		if k == numOutputs-1:
-		#			delimiter = ""
-                #
-		#		outputs = outputs + str(getNextOutputObjectSequential()) + delimiter
-            	#
-		#	endOfLine = "\n"
-		#	if i == numTransactions-1:
-		#		endOfLine = ""
-            	#
-		#	line = str(transactionID) + "\t" + inputs + "\t" + outputs + endOfLine
+			transactionxshardCounter[inputShard] = transactionxshardCounter[inputShard] +  1
 
-		# add all or up to numDummyObjects non-input shards to the output
-		else: #createDummyObjects is implicitly assumed to be true in this case
-			nonInputShards = allShards - inputShards
+			if outputObjectMode != -1: # generate output objects randomly or sequentially
 
-			# Include dummy objects from all the non-input shards
-			counter = 0
+				for j in range(numOutputs):
+					delimiter = ";"
+					#don't put delimiter after the last output
+					if j == numOutputs-1:
+						delimiter = ""
 
-			l_nonInputShards = list(nonInputShards)
-			random.shuffle(l_nonInputShards) # randomize the order of shards
+					strOutput = ""
 
-			for eachShard in l_nonInputShards:
-				counter += 1
+	                		# 0 for random output selection, and 1 for sequential
+					if outputObjectMode == 0:
+						outputShard = getRandomShard()
+						strOutput = str(getNextOutputObject(outputShard))
+					elif outputObjectMode == 2:
+						outputShard = getSameShard(inputShard)
+						strOutput = str(getNextOutputObject(outputShard))
+					elif outputObjectMode == 3:
+						outputShard = getDifferentShard(inputShard)
+						strOutput = str(getNextOutputObject(outputShard))
+					elif outputObjectMode == 4:
+						outputShard = getOutputShardFromFile(ins)
+						strOutput = str(getNextOutputObject(outputShard))
+					else:
+						theObject = getNextOutputObjectSequential()
+						strOutput = str(theObject)
+						outputShard = mapObjectToShard(theObject)
 
-				outputObject = getNextOutputObject(eachShard)
+					outputShards.add(outputShard)
+					outputs = outputs + strOutput + delimiter
 
-				inputObject = getNextInputObject(eachShard)
-				inputs = inputs + ";" + str(inputObject)
+	                	if createDummyObjects == 1:
+	                    		outputOnlyShards = outputShards - inputShards # shards that only occur in output
 
-				delimiter = ";"
-				# don't put delimiter after the last output
-				if counter == len(nonInputShards):
-					delimiter = ""
-				outputs = outputs + str(outputObject) + delimiter
+	                    		# Include dummy objects from all the outputOnly shards
+	                    		counter = 0
+	                    		for eachShard in outputOnlyShards: # add dummy objects to inputs for output-only shards
+	                        		counter += 1
+	                        		inputObject = getNextInputObject(eachShard)
+	                        		inputs = inputs + ";" + str(inputObject)
 
-				if counter == numDummyObjects:
-					break
+	                # Bano: This is old code that used to sequentially pick outputs from shards
+			#	for k in range(numOutputs):
+			#		delimiter = ";"
+			#		# don't put delimiter after the last output
+			#		if k == numOutputs-1:
+			#			delimiter = ""
+	                #
+			#		outputs = outputs + str(getNextOutputObjectSequential()) + delimiter
+	            	#
+			#	endOfLine = "\n"
+			#	if i == numTransactions-1:
+			#		endOfLine = ""
+	            	#
+			#	line = str(transactionID) + "\t" + inputs + "\t" + outputs + endOfLine
 
-		endOfLine = "\n"
-		if i == numTransactions-1:
-			endOfLine = ""
+			# add all or up to numDummyObjects non-input shards to the output
+			else: #createDummyObjects is implicitly assumed to be true in this case
+				nonInputShards = allShards - inputShards
 
-		line = str(transactionID) + "\t" + inputs + "\t" + outputs + endOfLine
+				# Include dummy objects from all the non-input shards
+				counter = 0
 
-		outFile.write(line)
+				l_nonInputShards = list(nonInputShards)
+				random.shuffle(l_nonInputShards) # randomize the order of shards
 
-		inputShards.clear()
-		outputShards.clear()
+				for eachShard in l_nonInputShards:
+					counter += 1
 
-	for i in range(numShards):
-		print transactionxshardCounter[i]
-	# Close file
-	outFile.close()
+					outputObject = getNextOutputObject(eachShard)
+
+					inputObject = getNextInputObject(eachShard)
+					inputs = inputs + ";" + str(inputObject)
+
+					delimiter = ";"
+					# don't put delimiter after the last output
+					if counter == len(nonInputShards):
+						delimiter = ""
+					outputs = outputs + str(outputObject) + delimiter
+
+					if counter == numDummyObjects:
+						break
+
+			endOfLine = "\n"
+			if i == numTransactions-1:
+				endOfLine = ""
+
+			line = str(transactionID) + "\t" + inputs + "\t" + outputs + endOfLine
+
+			outFile.write(line)
+
+			inputShards.clear()
+			outputShards.clear()
+
+		for i in range(numShards):
+			print transactionxshardCounter[i]
+		# Close file
+		outFile.close()
 
 # =============
 # Program entry point

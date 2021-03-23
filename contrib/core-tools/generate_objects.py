@@ -15,7 +15,7 @@ import sys
 numObjects=2000
 
 # FIXME: How many shards
-numShards=5
+numShards=2
 
 # FIXME: Path where to write the output files
 path = "/home/alexandre/Desktop/test_aws/try2/byzcuit/chainspacecore/ChainSpaceConfig/"

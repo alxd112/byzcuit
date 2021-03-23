@@ -4,6 +4,7 @@ import time
 import sys
 import traceback
 import json
+import numpy as np
 
 from chainspacemeasurements import dumper
 from chainspacemeasurements.instances import ChainspaceNetwork, SHARD
@@ -21,7 +22,7 @@ def parse_client_simplelog(filename):
 
 class Tester(object):
     def __init__(self, network, core_directory='/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacecore', tpsfile='tps',latencyfile='lat'):
-        self.tpsfh = open(tpsfile, 'w')
+        self.tpsfh = open('/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/Resultats/'+str(tpsfile), 'w')
         self.latfh = open(latencyfile, 'w')
         self.core_directory = core_directory
         self.network = network
@@ -301,16 +302,22 @@ class Tester(object):
 
     def measure_sharding(self, min_validators, max_validators,num_transactions, num_shards, runs, mode,shardListPath):
 
+        nbremptyLat = 0
+        nbremptyTps = 0
         tps_sets_sets = []
         latency_times_sets_sets = []
-
+        allLatency = []
+        allTps = []
         for validators in range(min_validators,max_validators+1):
-            print "-----------Start test validators "+str(validators)
-            for num_dummies in range(1, num_shards):
+            #print "-----------Start test validators "+str(validators)
+            for num_dummies in range(1, 2): #num_shards
                 tps_sets = []
                 latency_times_sets = []
                 for i in range(runs):
                     try:
+                        print(")))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))")
+                        print("))))))))))))))))))))        run "+str(i)+"          )))))))))))))))))))))))))))")
+                        print(")))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))")
                         print "----------------Running measurements for {2} dummy objects across {0} shards (run {1}).".format(num_shards, i, num_dummies)
                         print "config core"
                         self.network.config_core(num_shards, validators)
@@ -325,25 +332,36 @@ class Tester(object):
                         time.sleep(10)
                         print "--------start simulation"
                         #dumper.simulation_batched(network, inputs_per_tx, outputs_per_tx, num_transactions=None, batch_size=4000, batch_sleep=1, input_object_mode=0, create_dummy_objects=0, num_dummy_objects=0, output_object_mode=0):
-
+                        #pati = "/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/Transactions/"+str(shardListPath)
+                        print("----------------------------------------------------------------------------------------------------------------------  "+str(shardListPath))
                         dumper.simulation_batched(self.network,num_transactions, 2, 2, shardListPath, input_object_mode=mode,create_dummy_objects=0, output_object_mode=mode)
                         print "simulation done"
                         time.sleep(20)
                         print "stop clients"
                         self.stop_clients()
-                        print("------ network "+str(self.network.get_tpsm_set()))
+
                         tps_set = self.network.get_tpsm_set()
-                        tps_set_avg = sum(tps_set) / len(tps_set)
-                        #print "Avg set "+str(tps_set_avg)
-                        tps_sets.append(tps_set_avg)
-                        print("------ latency "+str(self.network.get_latency()))
+                        if (len(tps_set) == 0 or sum(tps_set) == 0):
+                            print("-------- tps empty -------")
+                            nbremptyTps = nbremptyTps +1
+                        else :
+                            tps_set_avg = sum(tps_set) / len(tps_set)
+                            tps_sets.append(tps_set_avg)
+                            allTps.extend(tps_set)
+
+
                         latency_times = self.network.get_latency()
-                        latency_times_avg = sum(latency_times) / len(latency_times)
-                        #print "Latency: {0}".format(latency_times)
-                        latency_times_sets.append(latency_times_avg)
+                        if (len(latency_times)==0):
+                            print("-------- latency empty -------")
+                            nbremptyLat = nbremptyLat +1
+                        else : 
+                            latency_times_avg = sum(latency_times) / len(latency_times)
+                            latency_times_sets.append(latency_times_avg)
+                            allLatency.extend(latency_times)
 
                         #print "Result for {0} dummy objects (run {1}): {2}".format(num_dummies, i, tps_set)
                         #print "Result for {0} dummy objects (run {1}): {2}".format(num_dummies, i, latency_times_set)
+                        
                     except Exception:
                         traceback.print_exc()
                     finally:
@@ -372,8 +390,17 @@ class Tester(object):
         for x in tps_sets_sets:
             print "TPS "+str(x)
 
-        self.tpsfh.write(json.dumps(tps_sets_sets))
-        self.latfh.write(json.dumps(latency_times_sets_sets))
+        stdTps = np.std(np.array(allTps))
+        stdLatency = np.std(np.array(allLatency))
+        self.tpsfh.write("tps: "+str(tps_sets_sets)+" \n")
+        self.tpsfh.write("std: "+str(stdTps)+" \n")
+        self.tpsfh.write("latency: "+str(latency_times_sets_sets)+" \n")#son.dumps
+        self.tpsfh.write("std: "+str(stdLatency)+" \n")
+
+        print("nbr of empty Tps "+str(nbremptyTps))
+        print("nbr of empty Latency "+str(nbremptyLat))
+
+        #self.latfh.write(json.dumps(latency_times_sets_sets))
         return tps_sets_sets
 
 if __name__ == '__main__':
@@ -521,4 +548,4 @@ if __name__ == '__main__':
         n = ChainspaceNetwork(0)
         t = Tester(n, tpsfile=tpsfile,latencyfile=latfile)
 
-        print t.measure_sharding(min_validators, max_validators, num_transactions, num_shards, runs, 4,shardListPath)
+        print t.measure_sharding(min_validators, max_validators, num_transactions, num_shards, runs, 5,shardListPath) # mode a 4 avant
