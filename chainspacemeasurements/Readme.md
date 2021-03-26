@@ -1,7 +1,59 @@
 
 # How to create a Chainspace testbed using AWS EC2 instances
 
+## Configure your terminal for aws 
+
+1) create/sign in your aws account
+2) configure your local machine to be able to communicate with your aws account
+with
+```shell
+$ aws configure
+``` 
+you should be able to fill in your credentials (here)
+- AWS Access Key ID[None] = here
+- AWS Secret Access Key[None] = here
+- Default region name [None] = here
+--> if you have values instead of None, no worries you can modify those
+
+You will find your keys in the section Identity and Access Management (IAM) under the Users section.
+There you either already have a user to which you should already know your keys. If not or you dont remember those, simply create a new user.
+There you will have your keys.
+
+WARNING: The region you enter in the configuration should be the same than you see on your ec2 dahsboard (in the top right corner).
+
+## FixMe
+There are multiple lines where you'll have to do some modifications yourself before moving on:
+- in the file instances.py :
+  * line 23: change the region if needed
+  * line 338: directory = put your own path
+  * line 307, 321 : verify that this is the right path on your ec2 instance (this can be done connecting to one of your instance via putty and using the command "pwd")
+- tester.py:
+  * line 23: change your path
+- in the file generate_transactions.py:
+  * line 26: change your path
+- in the file generate_objects.py:
+  * line 21: change your path
+
+Then in file instance.py:
+- line 71: change your username
+- line 129: change the ImageId according to the one in your region (be careful the type of your machine is crucial, to help you, see the end of the file)
+- line 133: change the keyName to the one you created earlier
+- line 134: If your run the code now, you might get an error saying that your groupId is invalid. This is because you have no group created in your aws account. For this go to your dashboard, click on the section security group and create a new group called chainspace.
+WARNING: add inbound and outbound rules such that everything is allowed!
+- line 70 : you might get an error saying that it cannot connect to your instances because of an RSA key, add this line of code between client.set_missing... and client.connect(...) :
+```
+k = paramiko.RSAKey.from_private_key_file('./ec2-keypair.pem')
+```
+and change the argument key_filename = ... to
+```
+pkey = k
+```
+this will solve the problem
+
+
 ## Creating AWS EC2 instances and installing Chainspace 
+
+
 
 Clone github repository
 ```shell
