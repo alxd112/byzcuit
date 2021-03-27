@@ -547,5 +547,6 @@ if __name__ == '__main__':
         latfile = sys.argv[9]
         n = ChainspaceNetwork(0)
         t = Tester(n, tpsfile=tpsfile,latencyfile=latfile)
-
+        #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/CreateFakeTrans/'+shardListPath
+        shardListPath = '/home/admin/chainspace/chainspacemeasurements/chainspacemeasurements/CreateFakeTrans/'+shardListPath
         print t.measure_sharding(min_validators, max_validators, num_transactions, num_shards, runs, 5,shardListPath) # mode a 4 avant

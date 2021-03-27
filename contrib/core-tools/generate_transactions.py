@@ -23,8 +23,8 @@ numInputs=2
 numOutputs=2
 
 # FIXME: Path where to write the output files
-path = "/home/alexandre/Desktop/test_aws/try2/byzcuit/chainspacecore/ChainSpaceClientConfig/"
-
+#path = "/home/alexandre/Desktop/test_aws/try2/byzcuit/chainspacecore/ChainSpaceClientConfig/"
+path = '/home/admin/chainspace/chainspacecore/ChainSpaceClientConfig/'
 # FIXME: Used to seed output object generator
 # Choose a large number, greater than the input objects generated
 # to avoid overwriting input objects
@@ -47,7 +47,7 @@ inputObjectCounter = []
 # Mode 2: means that input objects will be sequentially chosen from the same shards
 # Mode 3: means that input objects will be sequentially chosen from different shards
 # Mode 4: means that input objects will be sequentially chosen from the shard in the list
-inputObjectMode = 2
+inputObjectMode = 5
 
 
 # Mode 0: means that output objects will be chosen from random shards
@@ -56,7 +56,7 @@ inputObjectMode = 2
 # Mode 3: means that output objects will be sequentially chosen from different shards
 # Mode 4: means that input objects will be sequentially chosen from the shard in the list
 # Mode -1: means that numDummyObjects (= non-input shards) will be added to transaction; (assuming createDummyObjects = 1)
-outputObjectMode = 2
+outputObjectMode = 5
 
 # Used in getNextShard to get shards sequentially
 nextShardCounter = 1
@@ -81,7 +81,7 @@ inputshardindex = 0
 inputShardFromFile = []
 
 # outputShardFromFile = []
-
+shardListPath = 'ee'
 def config(newNumShards, newNumTransactions, newNumInputs, newNumOutputs, newPath, newInputObjectMode, newCreateDummyObjects, newNumDummyObjects, newOutputObjectMode, newShardListPath):
 	global numShards
 	global numTransactions
