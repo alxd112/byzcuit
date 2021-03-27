@@ -337,13 +337,14 @@ class ChainspaceNetwork(object):
 		command = 'killall java' # hacky; should use pid file
 		self.ssh_exec(command, CLIENT)
 		self._log("Stopping all Chainspace clients.")
-
-	def prepare_transactions(self, num_transactions, num_inputs, num_outputs, shardListPath, directory='/home/admin/chainspace', input_object_mode=0, create_dummy_objects=0, num_dummy_objects=0, output_object_mode=0):
+	#/home/admin/chainspace
+	#/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit
+	def prepare_transactions(self, num_transactions, num_inputs, num_outputs, shardListPath, directory='/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit', input_object_mode=0, create_dummy_objects=0, num_dummy_objects=0, output_object_mode=0):
 		print "Prepare transactions "+str(num_transactions)+" "+str(num_inputs)+" "+str(num_outputs)+" "+directory+" "+str(input_object_mode)+" "+str(create_dummy_objects)+" "+str(num_dummy_objects)+" "+str(output_object_mode)
 		num_shards = str(len(self.shards))
 		num_transactions = str(int(num_transactions))
 		num_inputs = str(int(num_inputs))
-		num_outputs = str(int(num_outputs))
+		num_outputs = str(int(num_outputs)
 		input_object_mode = str(int(input_object_mode))
 		create_dummy_objects = str(int(create_dummy_objects))
 		num_dummy_objects = str(int(num_dummy_objects))
@@ -361,7 +362,7 @@ class ChainspaceNetwork(object):
 			self._single_ssh_exec(client, command)
 
 	def send_transactions(self, batch_size, batch_sleep):
-		command = 'python -c \'from chainspaceapi import ChainspaceClient; client = ChainspaceClient(); client.send_transactions_from_file({0}, {1})\''.format(batch_size, batch_sleep)
+		command = 'python -c \'from chainspaceapi import ChainspaceClient; client = ChainspaceClient(); client.send_transactions_from_file({0}, {1})\''.format(batch_size, batch_sleep)#batch_size
 		self.ssh_exec_in_clients(command)
 
 	def generate_objects(self, num_objects):

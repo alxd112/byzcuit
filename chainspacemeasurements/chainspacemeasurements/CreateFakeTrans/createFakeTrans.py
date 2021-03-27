@@ -6,8 +6,8 @@
 import random
 
 # Parameters: FIXME
-nbrShards= 4
-nbrTrans = 5000
+nbrShards= 2
+nbrTrans = 50000
 nbrInput = 1
 nbrOuput = 1
 

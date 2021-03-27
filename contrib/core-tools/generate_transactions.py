@@ -204,7 +204,9 @@ def genTransactionFile():
 		allOutput = [] # List of lists
 
 		with open(shardListPath, "r") as filestream:
+			#print("readd----------------------")
 			for line in filestream:
+				#print("readd----------------------")
 				currentline = line.split(":")
 				inputs  = currentline[0]
 				outputs = currentline[1]
@@ -224,6 +226,7 @@ def genTransactionFile():
 		fileName = path+"test_transactions.txt"
 
 		outFile = open(fileName, "w")
+		#print("--------------------"+str(fileName))
 
 		for i in range(numTransactions):
 			trans = ""
