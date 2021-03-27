@@ -334,7 +334,7 @@ class Tester(object):
                         #dumper.simulation_batched(network, inputs_per_tx, outputs_per_tx, num_transactions=None, batch_size=4000, batch_sleep=1, input_object_mode=0, create_dummy_objects=0, num_dummy_objects=0, output_object_mode=0):
                         #pati = "/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/Transactions/"+str(shardListPath)
                         print("----------------------------------------------------------------------------------------------------------------------  "+str(shardListPath))
-                        dumper.simulation_batched(self.network,num_transactions, 2, 2, shardListPath, input_object_mode=mode,create_dummy_objects=0, output_object_mode=mode)
+                        dumper.simulation_batched(self.network,num_transactions, 1, 1, shardListPath, input_object_mode=mode,create_dummy_objects=0, output_object_mode=mode)
                         print "simulation done"
                         time.sleep(20)
                         print "stop clients"

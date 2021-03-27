@@ -162,7 +162,8 @@ class ChainspaceNetwork(object):
 
 	def install_core(self, type):
 		self._log("Installing Chainspace core on all nodes...")
-		command = 'git clone https://github.com/sheharbano/byzcuit chainspace;'
+		#command = 'git clone https://github.com/sheharbano/byzcuit chainspace;'
+		command = 'git clone https://github.com/alxd112/byzcuit chainspace;'
 		command += 'sudo pip install chainspace/chainspacecontract;'
 		command += 'sudo pip install chainspace/chainspaceapi;'
 		command += 'sudo update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java;'
@@ -278,6 +279,7 @@ class ChainspaceNetwork(object):
 		self._log("Resetting Chainspace core state...")
 		command = ''
 		command += 'rm database.sqlite;'
+		print("#################  delete test_objects ################")
 		command += 'rm chainspace/chainspacecore/ChainSpaceConfig/test_objects*.txt;'
 		self.ssh_exec(command, type)
 		self._log("Reset Chainspace core state.")
@@ -336,7 +338,7 @@ class ChainspaceNetwork(object):
 		self.ssh_exec(command, CLIENT)
 		self._log("Stopping all Chainspace clients.")
 
-	def prepare_transactions(self, num_transactions, num_inputs, num_outputs, shardListPath, directory='/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit', input_object_mode=0, create_dummy_objects=0, num_dummy_objects=0, output_object_mode=0):
+	def prepare_transactions(self, num_transactions, num_inputs, num_outputs, shardListPath, directory='/home/admin/chainspace', input_object_mode=0, create_dummy_objects=0, num_dummy_objects=0, output_object_mode=0):
 		print "Prepare transactions "+str(num_transactions)+" "+str(num_inputs)+" "+str(num_outputs)+" "+directory+" "+str(input_object_mode)+" "+str(create_dummy_objects)+" "+str(num_dummy_objects)+" "+str(output_object_mode)
 		num_shards = str(len(self.shards))
 		num_transactions = str(int(num_transactions))
