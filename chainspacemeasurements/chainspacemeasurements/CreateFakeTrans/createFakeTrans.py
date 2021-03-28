@@ -6,10 +6,10 @@
 import random
 
 # Parameters: FIXME
-nbrShards= 4
+nbrShards= 3
 nbrTrans = 50000
-nbrInput = 3
-nbrOuput = 3
+nbrInput = 2
+nbrOuput = 2
 
 f = open("./noFullCross/nofullCross_SH"+str(nbrShards)+"_n_"+str(nbrInput)+".txt", "w")
 
