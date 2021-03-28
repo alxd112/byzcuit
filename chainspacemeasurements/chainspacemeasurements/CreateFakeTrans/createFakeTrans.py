@@ -6,12 +6,12 @@
 import random
 
 # Parameters: FIXME
-nbrShards= 2
+nbrShards= 4
 nbrTrans = 50000
-nbrInput = 1
-nbrOuput = 1
+nbrInput = 3
+nbrOuput = 3
 
-f = open("NoCrossTrans_SH"+str(nbrShards)+".txt", "w")
+f = open("./noFullCross/nofullCross_SH"+str(nbrShards)+"_n_"+str(nbrInput)+".txt", "w")
 
 
 for i in range(nbrTrans):
@@ -33,16 +33,30 @@ for i in range(nbrTrans):
 
 f.close()
 
-f = open("fullCross_SH"+str(nbrShards)+".txt", "w")
+f = open("./fullCross/fullCross_SH"+str(nbrShards)+"_n_"+str(nbrInput)+".txt", "w")
 
 
 for i in range(nbrTrans):
-	shard = random.randint(0,nbrShards - 1)
+	allShard = list(range(nbrShards))
+	alreadyChosenshard = []
+	shard = random.choice([elem for elem in allShard if elem not in alreadyChosenshard])
+	#shard = random.randint(0,nbrShards - 1)
 	text = ""
 	for count in range(nbrInput):
+		alreadyChosenshard.append(shard)
+		
 		text = text + str(shard)
+		#print(alreadyChosenshard)
+
+		if len(alreadyChosenshard) == nbrShards:
+			alreadyChosenshard = []
+
+		shard = random.choice([elem for elem in allShard if elem not in alreadyChosenshard])
+
 		if count != nbrInput - 1:
 			text = text + ","
+	
+	#print(text)
 	text = text + ":"
 	outShard = -1
 	while (outShard == -1 or (outShard != -1 and outShard == shard)):

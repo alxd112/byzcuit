@@ -10,7 +10,7 @@ from chainspacemeasurements import dumper
 from chainspacemeasurements.instances import ChainspaceNetwork, SHARD
 from chainspacemeasurements.dumpparser import parse_tcpdump
 
-
+chemin = 'Resultats/FakeTrans/medium/'
 def parse_client_simplelog(filename):
     data = open(filename).readlines()[2:]
     txes = {}
@@ -22,7 +22,7 @@ def parse_client_simplelog(filename):
 
 class Tester(object):
     def __init__(self, network, core_directory='/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacecore', tpsfile='tps',latencyfile='lat'):
-        self.tpsfh = open('/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/Resultats/'+str(tpsfile), 'w')
+        self.tpsfh = open('/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/'+str(chemin)+str(tpsfile), 'w')
         self.latfh = open(latencyfile, 'w')
         self.core_directory = core_directory
         self.network = network
@@ -547,6 +547,8 @@ if __name__ == '__main__':
         latfile = sys.argv[9]
         n = ChainspaceNetwork(0)
         t = Tester(n, tpsfile=tpsfile,latencyfile=latfile)
-        #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/CreateFakeTrans/'+shardListPath
+        shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/CreateFakeTrans/fullCross/'+shardListPath
+        #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/CreateFakeTrans/noFullCross/'+shardListPath
+
         #shardListPath = '/home/admin/chainspace/chainspacemeasurements/chainspacemeasurements/CreateFakeTrans/'+shardListPath
         print t.measure_sharding(min_validators, max_validators, num_transactions, num_shards, runs, 5,shardListPath) # mode a 4 avant

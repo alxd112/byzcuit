@@ -197,6 +197,13 @@ def genTransactionFile():
 	initInputObjectCounter()
 	initOutputObjectCounter()
 
+	print("###########################################################")
+	print("###########################################################")
+	print("###########################################################")
+	print(shardListPath)
+	print("###########################################################")
+	print("###########################################################")
+	print("###########################################################")
 
 	if inputObjectMode == 5:
 
@@ -222,7 +229,7 @@ def genTransactionFile():
 				allOutput.append(outputsList)
 
 		# All input and oupu are stored in the file allInput/Output variables
-
+		#print(allInput)
 		fileName = path+"test_transactions.txt"
 
 		outFile = open(fileName, "w")

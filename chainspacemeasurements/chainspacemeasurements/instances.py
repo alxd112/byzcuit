@@ -128,7 +128,7 @@ class ChainspaceNetwork(object):
 		self._log("Launching {0} instances of type {1}...".format(count, type))
 		self.ec2.create_instances(
 			ImageId='ami-e5a35782', # Debian 8.7
-			InstanceType='t2.micro',
+			InstanceType='t2.medium',
 			MinCount=count,
 			MaxCount=count,
 			KeyName='ec2-keypair4',
@@ -162,8 +162,8 @@ class ChainspaceNetwork(object):
 
 	def install_core(self, type):
 		self._log("Installing Chainspace core on all nodes...")
-		#command = 'git clone https://github.com/sheharbano/byzcuit chainspace;'
-		command = 'git clone https://github.com/alxd112/byzcuit chainspace;'
+		command = 'git clone https://github.com/sheharbano/byzcuit chainspace;'
+		#command = 'git clone https://github.com/alxd112/byzcuit chainspace;'
 		command += 'sudo pip install chainspace/chainspacecontract;'
 		command += 'sudo pip install chainspace/chainspaceapi;'
 		command += 'sudo update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java;'
@@ -344,11 +344,12 @@ class ChainspaceNetwork(object):
 		num_shards = str(len(self.shards))
 		num_transactions = str(int(num_transactions))
 		num_inputs = str(int(num_inputs))
-		num_outputs = str(int(num_outputs)
+		num_outputs = str(int(num_outputs))
 		input_object_mode = str(int(input_object_mode))
 		create_dummy_objects = str(int(create_dummy_objects))
 		num_dummy_objects = str(int(num_dummy_objects))
 		output_object_mode = str(int(output_object_mode))
+		os.system('rm '+directory+'/chainspacecore/ChainSpaceClientConfig/test_transactions.txt')
 		os.system('python ' + directory + '/contrib/core-tools/generate_transactions.py' + ' ' + num_shards + ' ' + num_transactions + ' ' + num_inputs + ' ' + num_outputs + ' ' + directory + '/chainspacecore/ChainSpaceClientConfig/' + ' ' + input_object_mode + ' ' + create_dummy_objects + ' ' + num_dummy_objects + ' ' + output_object_mode+' '+shardListPath)
 
 		transactions = open(directory + '/chainspacecore/ChainSpaceClientConfig/test_transactions.txt').read().splitlines()
@@ -393,7 +394,7 @@ class ChainspaceNetwork(object):
 			self._log("shard")
 			instance = shard[0]
 			tps = self._single_ssh_exec(instance, 'python chainspace/chainspacemeasurements/chainspacemeasurements/tpsm.py')[1]
-			print ("Get TPS "+str(tps))
+			#print ("Get TPS "+str(tps))
 			tps = float(tps.strip())
 			#print "Get TPS "+str(tps)
 			tps_set.append(tps)
