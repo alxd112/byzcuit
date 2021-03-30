@@ -1,0 +1,4 @@
+Infos:
+	- each files has been obtained with 10 runs
+	- and we tested twice random and clever
+	- in total 20 runs

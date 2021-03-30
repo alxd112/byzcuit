@@ -10,7 +10,8 @@ from chainspacemeasurements import dumper
 from chainspacemeasurements.instances import ChainspaceNetwork, SHARD
 from chainspacemeasurements.dumpparser import parse_tcpdump
 
-chemin = 'Resultats/FakeTrans/medium/'
+#chemin = 'Resultats/FakeTrans/medium/'
+chemin = 'Resultats/'
 def parse_client_simplelog(filename):
     data = open(filename).readlines()[2:]
     txes = {}
@@ -334,7 +335,7 @@ class Tester(object):
                         #dumper.simulation_batched(network, inputs_per_tx, outputs_per_tx, num_transactions=None, batch_size=4000, batch_sleep=1, input_object_mode=0, create_dummy_objects=0, num_dummy_objects=0, output_object_mode=0):
                         #pati = "/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/Transactions/"+str(shardListPath)
                         print("----------------------------------------------------------------------------------------------------------------------  "+str(shardListPath))
-                        dumper.simulation_batched(self.network,num_transactions, 2, 2, shardListPath, input_object_mode=mode,create_dummy_objects=0, output_object_mode=mode)
+                        dumper.simulation_batched(self.network,num_transactions, 1, 1, shardListPath, input_object_mode=mode,create_dummy_objects=0, output_object_mode=mode)
                         print "simulation done"
                         time.sleep(20)
                         print "stop clients"
@@ -547,8 +548,10 @@ if __name__ == '__main__':
         latfile = sys.argv[9]
         n = ChainspaceNetwork(0)
         t = Tester(n, tpsfile=tpsfile,latencyfile=latfile)
-        shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/CreateFakeTrans/fullCross/'+shardListPath
+        #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/CreateFakeTrans/fullCross/'+shardListPath
         #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/CreateFakeTrans/noFullCross/'+shardListPath
+        shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/Transactions/range:300k-300100/'+shardListPath
+        #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/Transactions/range:310k-310100/'+shardListPath
 
         #shardListPath = '/home/admin/chainspace/chainspacemeasurements/chainspacemeasurements/CreateFakeTrans/'+shardListPath
         print t.measure_sharding(min_validators, max_validators, num_transactions, num_shards, runs, 5,shardListPath) # mode a 4 avant
