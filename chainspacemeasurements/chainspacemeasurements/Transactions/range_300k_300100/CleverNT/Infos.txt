@@ -1,0 +1,202 @@
+Launched with :
+      --- Clever sharding without the global time assumption ---     
+|  Number of shards used :                       See below           |
+|  Start from block :                            300000              |
+|  To end block :                                300100              |
+|  U2S_coef :                                    0.2                 |
+|  alpha :                                       0.8                 |
+|  beta :                                        0.1                 |
+|  gamma :                                       0.8                 |
+|  timeWindow (in # of trans) :                  10000               |
+ --------------------------------------------------------------------
+
+
+
+Shards:
+2
+	 -> 27.54780821037754% of cross edges
+	 -> 27.54780821037754% of cross transactions
+
+	 ----------------------------- Time analysis -------------------------
+	Time needed only to shard 32741 transactions, in seconds:  488.2799454929987
+	This is 0.01491340965434772 second per transaction
+	----------------------------------------------------------------------
+
+	 ----------------------------- Results ------------------------------
+	| Total number of edges :                        46697               |
+	| Number of cross shard edges :                  12864               |
+	| Percentage of cross shard edges :              27.54780821037754   |
+	| Number of sharded transactions :               32741               |
+	| Number of cross shard transactions :           9272                |
+	| Percentage of cross shard transactions :       28.319232766256377  |
+	| Percentage of real cross shard transactions :  37.82637075718016   |
+	| LoadBalancing :                                0                   |
+	 --------------------------------------------------------------------
+
+3
+	For ChainSpace : 16267/46697 cross edges and 16267/46697 cross transactions
+	 -> 34.835214253592305% of cross edges
+	 -> 34.835214253592305% of cross transactions
+
+	 ----------------------------- Time analysis -------------------------
+	Time needed only to shard 32741 transactions, in seconds:  468.534884905003
+	This is 0.014310341312269112 second per transaction
+	----------------------------------------------------------------------
+
+	 ----------------------------- Results ------------------------------
+	| Total number of edges :                        46697               |
+	| Number of cross shard edges :                  16267               |
+	| Percentage of cross shard edges :              34.835214253592305  |
+	| Number of sharded transactions :               32741               |
+	| Number of cross shard transactions :           11234               |
+	| Percentage of cross shard transactions :       34.3117192510919    |
+	| Percentage of real cross shard transactions :  45.8306135770235    |
+	| LoadBalancing :                                0                   |
+	 --------------------------------------------------------------------
+4
+	For ChainSpace : 17938/46697 cross edges and 17938/46697 cross transactions
+	 -> 38.41360258688995% of cross edges
+	 -> 38.41360258688995% of cross transactions
+
+	 ----------------------------- Time analysis -------------------------
+	Time needed only to shard 32741 transactions, in seconds:  462.1764490669953
+	This is 0.014116137230597578 second per transaction
+	----------------------------------------------------------------------
+
+	 ----------------------------- Results ------------------------------
+	| Total number of edges :                        46697               |
+	| Number of cross shard edges :                  17938               |
+	| Percentage of cross shard edges :              38.41360258688995   |
+	| Number of sharded transactions :               32741               |
+	| Number of cross shard transactions :           12070               |
+	| Percentage of cross shard transactions :       36.86509269722977   |
+	| Percentage of real cross shard transactions :  49.24118798955614   |
+	| LoadBalancing :                                0                   |
+	 --------------------------------------------------------------------
+5
+	For ChainSpace : 20582/46697 cross edges and 20582/46697 cross transactions
+	 -> 44.07563655052787% of cross edges
+	 -> 44.07563655052787% of cross transactions
+
+	 ----------------------------- Time analysis -------------------------
+	Time needed only to shard 32741 transactions, in seconds:  488.040192385999
+	This is 0.014906086936440518 second per transaction
+	----------------------------------------------------------------------
+
+	 ----------------------------- Results ------------------------------
+	| Total number of edges :                        46697               |
+	| Number of cross shard edges :                  20582               |
+	| Percentage of cross shard edges :              44.07563655052787   |
+	| Number of sharded transactions :               32741               |
+	| Number of cross shard transactions :           12884               |
+	| Percentage of cross shard transactions :       39.35127210531138   |
+	| Percentage of real cross shard transactions :  52.56201044386423   |
+	| LoadBalancing :                                0                   |
+	 --------------------------------------------------------------------
+6
+	For ChainSpace : 21593/46697 cross edges and 21593/46697 cross transactions
+	 -> 46.240657858106516% of cross edges
+	 -> 46.240657858106516% of cross transactions
+
+	 ----------------------------- Time analysis -------------------------
+	Time needed only to shard 32741 transactions, in seconds:  494.5720318559948
+	This is 0.015105587240951552 second per transaction
+	----------------------------------------------------------------------
+
+	 ----------------------------- Results ------------------------------
+	| Total number of edges :                        46697               |
+	| Number of cross shard edges :                  21593               |
+	| Percentage of cross shard edges :              46.240657858106516  |
+	| Number of sharded transactions :               32741               |
+	| Number of cross shard transactions :           13236               |
+	| Percentage of cross shard transactions :       40.426376714211536  |
+	| Percentage of real cross shard transactions :  53.99804177545692   |
+	| LoadBalancing :                                0                   |
+	 --------------------------------------------------------------------
+	
+7	-> For ChainSpace : 22490/46697 cross edges and 22490/46697 cross transactions
+	 -> 48.16155213397006% of cross edges
+	 -> 48.16155213397006% of cross transactions
+
+
+	 ----------------------------- Time analysis -------------------------
+	Time needed only to shard 32741 transactions, in seconds:  377.43908027899994
+	This is 0.011528025420084907 second per transaction
+	----------------------------------------------------------------------
+
+	 ----------------------------- Results ------------------------------
+	| Total number of edges :                        46697               |
+	| Number of cross shard edges :                  22490               |
+	| Percentage of cross shard edges :              48.16155213397006   |
+	| Number of sharded transactions :               32741               |
+	| Number of cross shard transactions :           13629               |
+	| Percentage of cross shard transactions :       41.62670657585291   |
+	| Percentage of real cross shard transactions :  55.60133812010444   |
+	| LoadBalancing :                                0                   |
+
+8	For ChainSpace : 24590/46697 cross edges and 24590/46697 cross transactions
+	 -> 52.65862903398505% of cross edges
+	 -> 52.65862903398505% of cross transactions
+
+
+	 ----------------------------- Time analysis -------------------------
+	Time needed only to shard 32741 transactions, in seconds:  361.4039108200016
+	This is 0.011038267335145586 second per transaction
+	----------------------------------------------------------------------
+
+	 ----------------------------- Results ------------------------------
+	| Total number of edges :                        46697               |
+	| Number of cross shard edges :                  24590               |
+	| Percentage of cross shard edges :              52.65862903398505   |
+	| Number of sharded transactions :               32741               |
+	| Number of cross shard transactions :           13764               |
+	| Percentage of cross shard transactions :       42.03903362756177   |
+	| Percentage of real cross shard transactions :  56.15208877284595   |
+	| LoadBalancing :                                0                   |
+	 --------------------------------------------------------------------
+
+9
+	For ChainSpace : 23290/46697 cross edges and 23290/46697 cross transactions
+	 -> 49.874724286356724% of cross edges
+	 -> 49.874724286356724% of cross transactions
+
+
+	 ----------------------------- Time analysis -------------------------
+	Time needed only to shard 32741 transactions, in seconds:  371.85883519300205
+	This is 0.011357589419779544 second per transaction
+	----------------------------------------------------------------------
+
+	 ----------------------------- Results ------------------------------
+	| Total number of edges :                        46697               |
+	| Number of cross shard edges :                  23290               |
+	| Percentage of cross shard edges :              49.874724286356724  |
+	| Number of sharded transactions :               32741               |
+	| Number of cross shard transactions :           14055               |
+	| Percentage of cross shard transactions :       42.927827494578665  |
+	| Percentage of real cross shard transactions :  57.33926240208877   |
+	| LoadBalancing :                                0                   |
+	 --------------------------------------------------------------------
+
+10
+	For ChainSpace : 22647/46697 cross edges and 22647/46697 cross transactions
+	 -> 48.497762168875944% of cross edges
+	 -> 48.497762168875944% of cross transactions
+
+
+	 ----------------------------- Time analysis -------------------------
+	Time needed only to shard 32741 transactions, in seconds:  382.6830528400012
+	This is 0.011688190734553044 second per transaction
+	----------------------------------------------------------------------
+
+	 ----------------------------- Results ------------------------------
+	| Total number of edges :                        46697               |
+	| Number of cross shard edges :                  22647               |
+	| Percentage of cross shard edges :              48.497762168875944  |
+	| Number of sharded transactions :               32741               |
+	| Number of cross shard transactions :           13993               |
+	| Percentage of cross shard transactions :       42.7384624782383    |
+	| Percentage of real cross shard transactions :  57.08632506527415   |
+	| LoadBalancing :                                0                   |
+	 --------------------------------------------------------------------
+
+

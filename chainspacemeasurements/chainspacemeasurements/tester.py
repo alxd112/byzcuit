@@ -390,13 +390,18 @@ class Tester(object):
 
         for x in tps_sets_sets:
             print "TPS "+str(x)
-
+        print(allTps)
         stdTps = np.std(np.array(allTps))
         stdLatency = np.std(np.array(allLatency))
         self.tpsfh.write("tps: "+str(tps_sets_sets)+" \n")
         self.tpsfh.write("std: "+str(stdTps)+" \n")
         self.tpsfh.write("latency: "+str(latency_times_sets_sets)+" \n")#son.dumps
         self.tpsfh.write("std: "+str(stdLatency)+" \n")
+        self.tpsfh.write("  \n")
+        self.tpsfh.write(str(allTps)+" \n")
+        self.tpsfh.write("  \n")
+        self.tpsfh.write("nbr empty tps: "+str(nbremptyTps)+" \n")
+        self.tpsfh.write("nbr empty latency: "+str(nbremptyLat)+" \n")
 
         print("nbr of empty Tps "+str(nbremptyTps))
         print("nbr of empty Latency "+str(nbremptyLat))
@@ -550,8 +555,9 @@ if __name__ == '__main__':
         t = Tester(n, tpsfile=tpsfile,latencyfile=latfile)
         #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/CreateFakeTrans/fullCross/'+shardListPath
         #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/CreateFakeTrans/noFullCross/'+shardListPath
-        shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/Transactions/range:300k-300100/'+shardListPath
-        #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/Transactions/range:310k-310100/'+shardListPath
+        shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/Transactions/range_300k_300100/'+shardListPath
+        #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/Transactions/range_310k_310100/'+shardListPath
+        #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/Transactions/range_300k_300375/'+shardListPath
 
         #shardListPath = '/home/admin/chainspace/chainspacemeasurements/chainspacemeasurements/CreateFakeTrans/'+shardListPath
         print t.measure_sharding(min_validators, max_validators, num_transactions, num_shards, runs, 5,shardListPath) # mode a 4 avant
