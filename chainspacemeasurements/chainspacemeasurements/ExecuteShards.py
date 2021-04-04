@@ -2,11 +2,11 @@ import os
 import time
 import serial
 
-minSH = 2
+minSH = 10
 maxSH = 10
 nbrRuns = 10
 nbrTrans = 46697
-Tests = ["Random", "Clever"]
+Tests = ["Clever"]#"Random", 
 
 for i in range(minSH, maxSH + 1):
 
@@ -19,7 +19,7 @@ for i in range(minSH, maxSH + 1):
 
 	os.system('python -c \'from chainspacemeasurements.instances import ChainspaceNetwork; n = ChainspaceNetwork(0); n.launch('+str(nbrValidators)+',0); n.launch('+str(nbrClients)+',1);\'')
 	print("wait 50 sec then install")
-	wait = 80*(i/2.0)
+	wait = 60*(i/2.0)
 	time.sleep(120)
 	os.system('python -c \'from chainspacemeasurements.instances import ChainspaceNetwork; n = ChainspaceNetwork(0); n.ssh_connect(0); n.ssh_connect(1); n.install_deps(0); n.install_deps(1); n.install_core(0); n.install_core(1);\'')
 	
