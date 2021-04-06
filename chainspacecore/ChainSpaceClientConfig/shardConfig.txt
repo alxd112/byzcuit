@@ -1,2 +1,4 @@
 0 /home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacecore/ChainSpaceClientConfig/shards/s0
 1 /home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacecore/ChainSpaceClientConfig/shards/s1
+2 /home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacecore/ChainSpaceClientConfig/shards/s2
+3 /home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacecore/ChainSpaceClientConfig/shards/s3

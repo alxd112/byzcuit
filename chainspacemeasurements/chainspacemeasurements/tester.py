@@ -555,10 +555,10 @@ if __name__ == '__main__':
         t = Tester(n, tpsfile=tpsfile,latencyfile=latfile)
         #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/CreateFakeTrans/fullCross/'+shardListPath
         #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/CreateFakeTrans/noFullCross/'+shardListPath
-        #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/CreateFakeTrans/fullCross_inp/'+shardListPath
+        shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/CreateFakeTrans/fullCross_inp/'+shardListPath
         
         #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/Transactions/range_300k_300100/'+shardListPath
-        shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/Transactions/range_300k_300400/'+shardListPath
+        #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/Transactions/range_300k_300400/'+shardListPath
 
         #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/Transactions/range_310k_310100/'+shardListPath
         #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/Transactions/range_300k_300375/'+shardListPath

@@ -6,7 +6,7 @@
 import random
 
 # Parameters: FIXME
-nbrShards= 4
+nbrShards= 2
 nbrTrans = 50000
 nbrInput = nbrShards
 nbrOuput = nbrShards
@@ -32,6 +32,28 @@ for i in range(nbrTrans):
 	text = text + ":"
 	for count in range(nbrOuput):
 		text = text + str(outshard)
+		if count != nbrOuput - 1:
+			text = text + ","
+	text = text + "\n"	
+	f.write(text)
+
+
+
+f.close()
+
+f = open("./fullCross_inp/nofullCrossInp_SH"+str(nbrShards)+"_n_"+str(nbrInput)+".txt", "w")
+
+
+for i in range(nbrTrans):
+	shard = random.randint(0,nbrShards - 1)
+	text = ""
+	for count in range(nbrInput):
+		text = text + str(shard)
+		if count != nbrInput - 1:
+			text = text + ","
+	text = text + ":"
+	for count in range(nbrOuput):
+		text = text + str(shard)
 		if count != nbrOuput - 1:
 			text = text + ","
 	text = text + "\n"	
