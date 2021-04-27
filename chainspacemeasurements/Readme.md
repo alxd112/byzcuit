@@ -26,7 +26,7 @@ WARNING: The region you enter in the configuration should be the same than you s
 
 Clone github repository
 ```shell
-$ git clone git@github.com:alxd112/byzcuit.git
+$ git clone https://github.com/alxd112/byzcuit.git
 ```
 
 Install python libraries
