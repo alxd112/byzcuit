@@ -13,6 +13,7 @@ you should be able to fill in your credentials (here)
 - AWS Access Key ID[None] = here
 - AWS Secret Access Key[None] = here
 - Default region name [None] = here
+- Default output format [None] = None
 --> if you have values instead of None, no worries you can modify those
 
 You will find your keys in the section Identity and Access Management (IAM) under the Users section.
@@ -20,6 +21,20 @@ There you either already have a user to which you should already know your keys.
 There you will have your keys.
 
 WARNING: The region you enter in the configuration should be the same than you see on your ec2 dahsboard (in the top right corner).
+
+## Install
+
+Clone github repository
+```shell
+$ git clone git@github.com:alxd112/byzcuit.git
+```
+
+Install python libraries
+```shell
+$ cd byzcuit
+$ pip install -e chainspacemeasurements
+```
+
 
 ## FixMe
 There are multiple lines where you'll have to do some modifications yourself before moving on:
@@ -54,17 +69,6 @@ this will solve the problem
 ## Creating AWS EC2 instances and installing Chainspace 
 
 
-
-Clone github repository
-```shell
-$ git clone git@github.com:srene/byzcuit.git
-```
-
-Install python libraries
-```shell
-$ cd byzcuit
-$ pip install -e chainspacemeasurements
-```
 
 Create EC2 instances. Replace X with the number of validators instances and clients required. In n.launch(X,t) the t value is for the type of node. 1 is for clients and 0 for validators.
 ```shell
