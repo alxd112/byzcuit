@@ -52,6 +52,8 @@ There are multiple lines where you'll have to do some modifications yourself bef
   * line 5 and 8: change the name of the keypair if you want to
   * Execute : "python keypair.py"
   * This should have created a .pem file
+
+
 Then in file instance.py:
 - line 129: change the ImageId according to the one in your region (be careful the type of your machine is crucial, to help you, see the end of the file)
 - line 133: change the keyName to the one you created earlier
