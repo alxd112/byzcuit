@@ -52,6 +52,8 @@ There are multiple lines where you'll have to do some modifications yourself bef
   * line 5 and 8: change the name of the keypair if you want to
   * Execute : "python keypair.py"
   * This should have created a .pem file
+  * (optional/if error) specify your region line 2 with "ec2 = boto3.resource('ec2', region_name = 'eu-west-2')"
+
 
 
 Then in file instance.py:
