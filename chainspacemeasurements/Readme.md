@@ -48,9 +48,11 @@ There are multiple lines where you'll have to do some modifications yourself bef
   * line 26: change your path
 - in the file generate_objects.py:
   * line 21: change your path
-
+- keypair.py
+  * line 5 and 8: change the name of the keypair if you want to
+  * Execute : "python keypair.py"
+  * This should have created a .pem file
 Then in file instance.py:
-- line 71: change your username
 - line 129: change the ImageId according to the one in your region (be careful the type of your machine is crucial, to help you, see the end of the file)
 - line 133: change the keyName to the one you created earlier
 - line 134: If your run the code now, you might get an error saying that your groupId is invalid. This is because you have no group created in your aws account. For this go to your dashboard, click on the section security group and create a new group called chainspace.
