@@ -1,0 +1,4 @@
+Simus done with:
+  -2 inputs and 2 outputs
+  -50 000 transactions
+  -10 runs

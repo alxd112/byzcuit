@@ -1,0 +1,5 @@
+Readme:
+
+Simulations done with:
+	- 10 runs
+	- 50 000 transactions
