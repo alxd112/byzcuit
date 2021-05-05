@@ -60,7 +60,7 @@ for i in shardList:
 				x = ast.literal_eval(line[1])
 
 
-			if count == 0:   tpsMeanRand.append(x[0]) 
+			if count == 0:   tpsMeanRand.append(x[0]*i) 
 			elif count == 1: tpsStdRand.append(float(line[1]))
 			elif count == 2: LatMeanRand.append(x[0])
 			elif count == 3: LatStdRand.append(float(line[1]))
@@ -82,7 +82,7 @@ y = tpsMean
 fig, (ax0, ax1) = plt.subplots(nrows=2, sharex=True)
 ax0.errorbar(x, y, yerr=asymetricerrorStd, fmt='-o', label = "Clever")
 ax0.set_ylabel("Tps [s]")
-ax0.set_title("Graph done with 4 shards")
+ax0.set_title("Graph done with 1 input/output")
 ax0.grid(True, which = "both")
 
 
@@ -90,7 +90,7 @@ y = LatMean
 asymetricerrorLatency = [LatStd, LatStd]
 ax1.errorbar(x, y, yerr=asymetricerrorLatency, fmt='-o', label = "Clever" )
 ax1.set_ylabel("Latency[ms]")
-ax1.set_xlabel("Number of input and ouput/transaction")
+ax1.set_xlabel("Number of shards")
 ax1.grid(True, which = "both")
 
 #### nocross ####

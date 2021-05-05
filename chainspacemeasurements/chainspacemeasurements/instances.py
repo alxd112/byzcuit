@@ -127,7 +127,7 @@ class ChainspaceNetwork(object):
 	def launch(self, count, type):
 		self._log("Launching {0} instances of type {1}...".format(count, type))
 		self.ec2.create_instances(
-			ImageId='ami-e5a35782', # Debian 8.7
+			ImageId='ami-e5a35782',#'ami-e5a35782', # Debian 8.7
 			InstanceType='t2.medium',
 			MinCount=count,
 			MaxCount=count,
@@ -354,9 +354,25 @@ class ChainspaceNetwork(object):
 
 		transactions = open(directory + '/chainspacecore/ChainSpaceClientConfig/test_transactions.txt').read().splitlines()
 		transactions_per_client = len(transactions) / len(self.clients)
+		#data = '\\n'.join([transactions.pop() for i in range(transactions_per_client)])
+		x = [""]*len(self.clients)
+		i = 0
+		for line in transactions:
+			print("clllllienttttt")
+			clienti = i%len(self.clients)
+			print(clienti)
 
+			x[clienti] = x[clienti] + line+"\n"
+			i+=1
+		i = 0
 		for client in self.clients:
-			data = '\\n'.join([transactions.pop() for i in range(transactions_per_client)])
+			print("eeeeeeeeeeeeee")
+			print(i)
+			# data = '\\n'.join([transactions.pop() for i in range(transactions_per_client)])
+			# print("dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+			data = x[i]
+			print(data)
+			i+=1
 
 			#command = 'printf \'' + data + '\' > ' + directory + '/chainspacecore/ChainSpaceClientConfig/test_transactions.txt;'
 			command = 'printf \'' + data + '\' > ' + '/home/admin/chainspace/chainspacecore/ChainSpaceClientConfig/test_transactions.txt;'

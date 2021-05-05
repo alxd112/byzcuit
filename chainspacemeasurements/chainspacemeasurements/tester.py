@@ -42,6 +42,8 @@ class Tester(object):
 
     def start_clients(self):
         self.network.config_clients(len(self.network.shards)*8)
+        #self.network.config_clients(1)
+
         n.start_clients()
 
     def stop_clients(self):

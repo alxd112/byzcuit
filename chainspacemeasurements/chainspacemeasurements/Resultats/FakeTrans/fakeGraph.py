@@ -24,7 +24,7 @@ for i in range(minInput, maxInput):
 		x = ast.literal_eval(line[1])
 
 
-		if count == 0:   tpsMean.append(x[0]*i) 
+		if count == 0:   tpsMean.append(x[0]*4) 
 		elif count == 1: tpsStd.append(float(line[1]))
 		elif count == 2: LatMean.append(x[0])
 		elif count == 3: LatStd.append(float(line[1]))
@@ -45,7 +45,7 @@ for i in range(minInput, maxInput):
 		line = line.split(" ")
 		x = ast.literal_eval(line[1])
 
-		if count == 0:   tpsMeanRand.append(x[0]*i) 
+		if count == 0:   tpsMeanRand.append(x[0]*4) 
 		elif count == 1: tpsStdRand.append(float(line[1]))
 		elif count == 2: LatMeanRand.append(x[0])
 		elif count == 3: LatStdRand.append(float(line[1]))
