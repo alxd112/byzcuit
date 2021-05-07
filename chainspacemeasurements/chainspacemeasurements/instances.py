@@ -351,32 +351,43 @@ class ChainspaceNetwork(object):
 		output_object_mode = str(int(output_object_mode))
 		os.system('rm '+directory+'/chainspacecore/ChainSpaceClientConfig/test_transactions.txt')
 		os.system('python ' + directory + '/contrib/core-tools/generate_transactions.py' + ' ' + num_shards + ' ' + num_transactions + ' ' + num_inputs + ' ' + num_outputs + ' ' + directory + '/chainspacecore/ChainSpaceClientConfig/' + ' ' + input_object_mode + ' ' + create_dummy_objects + ' ' + num_dummy_objects + ' ' + output_object_mode+' '+shardListPath)
+		
 
 		transactions = open(directory + '/chainspacecore/ChainSpaceClientConfig/test_transactions.txt').read().splitlines()
 		transactions_per_client = len(transactions) / len(self.clients)
-		#data = '\\n'.join([transactions.pop() for i in range(transactions_per_client)])
-		x = [""]*len(self.clients)
-		i = 0
-		for line in transactions:
-			print("clllllienttttt")
-			clienti = i%len(self.clients)
-			print(clienti)
 
-			x[clienti] = x[clienti] + line+"\n"
-			i+=1
-		i = 0
 		for client in self.clients:
-			print("eeeeeeeeeeeeee")
-			print(i)
-			# data = '\\n'.join([transactions.pop() for i in range(transactions_per_client)])
-			# print("dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-			data = x[i]
-			print(data)
-			i+=1
+			data = '\\n'.join([transactions.pop() for i in range(transactions_per_client)])
 
 			#command = 'printf \'' + data + '\' > ' + directory + '/chainspacecore/ChainSpaceClientConfig/test_transactions.txt;'
 			command = 'printf \'' + data + '\' > ' + '/home/admin/chainspace/chainspacecore/ChainSpaceClientConfig/test_transactions.txt;'
 			self._single_ssh_exec(client, command)
+			
+		# transactions = open(directory + '/chainspacecore/ChainSpaceClientConfig/test_transactions.txt').read().splitlines()
+		# transactions_per_client = len(transactions) / len(self.clients)
+		# #data = '\\n'.join([transactions.pop() for i in range(transactions_per_client)])
+		# x = [""]*len(self.clients)
+		# i = 0
+		# for line in transactions:
+		# 	print("clllllienttttt")
+		# 	clienti = i%len(self.clients)
+		# 	print(clienti)
+
+		# 	x[clienti] = x[clienti] + line+"\n"
+		# 	i+=1
+		# i = 0
+		# for client in self.clients:
+		# 	print("eeeeeeeeeeeeee")
+		# 	print(i)
+		# 	# data = '\\n'.join([transactions.pop() for i in range(transactions_per_client)])
+		# 	# print("dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+		# 	data = x[i]
+		# 	print(data)
+		# 	i+=1
+
+		# 	#command = 'printf \'' + data + '\' > ' + directory + '/chainspacecore/ChainSpaceClientConfig/test_transactions.txt;'
+		# 	command = 'printf \'' + data + '\' > ' + '/home/admin/chainspace/chainspacecore/ChainSpaceClientConfig/test_transactions.txt;'
+		# 	self._single_ssh_exec(client, command)
 
 	def send_transactions(self, batch_size, batch_sleep):
 		command = 'python -c \'from chainspaceapi import ChainspaceClient; client = ChainspaceClient(); client.send_transactions_from_file({0}, {1})\''.format(batch_size, batch_sleep)#batch_size
