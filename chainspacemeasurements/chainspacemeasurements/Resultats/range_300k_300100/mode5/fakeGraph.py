@@ -9,17 +9,17 @@ minSh = 2
 maxSh = 8   # put +1 than you need
 minInput = 2
 maxInput = 3# put +1 than you need
-shardList = [2,3,4,5, 6, 7, 8]
+shardList = [3, 4, 5, 7, 8, 9, 10]
 
 #Clever
-filename = "Clever/Clever_"
+filename = "Clever/clever"
 tpsMean = []
 tpsStd  = []
 LatMean = []
 LatStd  = []
 allTps  = x = [[] for i in range(10)]
 for i in shardList:
-	file = filename+str(i)+"Mode_"+str(mode)+".txt"
+	file = filename+str(i)+".txt"
 	f = open(file, "r")
 	count = 0
 	print(i)
@@ -42,7 +42,7 @@ for i in shardList:
 			count += 1
 
 ### Rabdom ###
-filename2 = "Random/Random_"
+filename2 = "Random/random"
 tpsMeanRand = []
 tpsStdRand  = []
 LatMeanRand = []
@@ -50,7 +50,7 @@ LatStdRand  = []
 allTpsRand  = x = [[] for i in range(10)]
 
 for i in shardList:
-	file = filename2+str(i)+"Mode_"+str(mode)+".txt"
+	file = filename2+str(i)+".txt"
 	f = open(file, "r")
 	count = 0
 	for line in f:
@@ -137,7 +137,7 @@ plt.xlabel("Tps [s]")
 plt.savefig("Graph_distrib_Clever_Random.png")
 
 
-
+"""
 ###########################
 crossTran = [28.69, 37.42, 39.89, 42.84, 43.84, 45.19, 45.92]
 crossEdge = [16.03, 22.07, 23.51, 24.52, 20.99, 24.67, 24.60]
@@ -165,3 +165,4 @@ ax0.legend()
 ax1.legend()
 
 plt.savefig("Graph_Clever_Random_percentage.png")
+"""
