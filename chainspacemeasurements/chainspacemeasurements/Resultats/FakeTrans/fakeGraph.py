@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import ast
 
 minSh = 2
-maxSh = 5   # put +1 than you need
+maxSh = 6   # put +1 than you need
 minInput = 1
 maxInput = 5# put +1 than you need
 
@@ -113,14 +113,15 @@ for i in range(minSh, maxSh):
 	count = 0
 	for line in f:
 		line = line.split(" ")
-		x = ast.literal_eval(line[1])
+		if count<=3:
+			x = ast.literal_eval(line[1])
 
 
-		if count == 0:   tpsMean.append(x[0]*i) 
-		elif count == 1: tpsStd.append(float(line[1]))
-		elif count == 2: LatMean.append(x[0])
-		elif count == 3: LatStd.append(float(line[1]))
-		count += 1
+			if count == 0:   tpsMean.append(x[0]*i) 
+			elif count == 1: tpsStd.append(float(line[1]))
+			elif count == 2: LatMean.append(x[0])
+			elif count == 3: LatStd.append(float(line[1]))
+			count += 1
 
 ### nocross ###
 filename2 = "nbrOfShard_medium/nofullcross_SH"
@@ -135,13 +136,14 @@ for i in range(minSh, maxSh):
 	count = 0
 	for line in f:
 		line = line.split(" ")
-		x = ast.literal_eval(line[1])
+		if count <= 3:
+			x = ast.literal_eval(line[1])
 
-		if count == 0:   tpsMeanRand.append(x[0]*i) 
-		elif count == 1: tpsStdRand.append(float(line[1]))
-		elif count == 2: LatMeanRand.append(x[0])
-		elif count == 3: LatStdRand.append(float(line[1]))
-		count += 1
+			if count == 0:   tpsMeanRand.append(x[0]*i) 
+			elif count == 1: tpsStdRand.append(float(line[1]))
+			elif count == 2: LatMeanRand.append(x[0])
+			elif count == 3: LatStdRand.append(float(line[1]))
+			count += 1
 
 
 
@@ -156,8 +158,8 @@ print(x)
 print(y)
 fig, (ax0, ax1) = plt.subplots(nrows=2, sharex=True)
 ax0.errorbar(x, y, yerr=asymetricerrorStd, fmt='-o', label = "fullcross")
-ax0.set_ylabel("Tps [s]")
-ax0.set_title("Graph done with 2 inputs and 2 outputs")
+ax0.set_ylabel("Tps")
+ax0.set_title("Graph showing the variation of the mean tps\n and latencies in function of the number of shards")
 ax0.grid(True, which = "both")
 
 
@@ -201,7 +203,7 @@ tpsStd  = []
 LatMean = []
 LatStd  = []
 
-for i in range(minSh, maxSh):
+for i in range(minSh, maxSh-1):
 	file = filename+str(i)+"_n"+str(i)+"_range1.txt"
 	f = open(file, "r")
 	count = 0
@@ -225,7 +227,7 @@ tpsStdRand  = []
 LatMeanRand = []
 LatStdRand  = []
 
-for i in range(minSh, maxSh):
+for i in range(minSh, maxSh-1):
 	file = filename2+str(i)+"_n"+str(i)+".txt"
 	f = open(file, "r")
 	count = 0
@@ -247,7 +249,7 @@ for i in range(minSh, maxSh):
 
 asymetricerrorStd = [tpsStd, tpsStd]
 
-x = list(range(minSh, maxSh))
+x = list(range(minSh, maxSh-1))
 y = tpsMean
 print(x)
 print(y)
@@ -301,14 +303,15 @@ for i in range(minSh, maxSh):
 	count = 0
 	for line in f:
 		line = line.split(" ")
-		x = ast.literal_eval(line[1])
+		if count <= 3:
+			x = ast.literal_eval(line[1])
 
 
-		if count == 0:   tpsMean.append(x[0]*i) 
-		elif count == 1: tpsStd.append(float(line[1]))
-		elif count == 2: LatMean.append(x[0])
-		elif count == 3: LatStd.append(float(line[1]))
-		count += 1
+			if count == 0:   tpsMean.append(x[0]*i) 
+			elif count == 1: tpsStd.append(float(line[1]))
+			elif count == 2: LatMean.append(x[0])
+			elif count == 3: LatStd.append(float(line[1]))
+			count += 1
 
 ### nocross ###
 filename2 = "nbrOfShard_medium/nofullcross_SH"
@@ -323,16 +326,17 @@ for i in range(minSh, maxSh):
 	count = 0
 	for line in f:
 		line = line.split(" ")
-		x = ast.literal_eval(line[1])
+		if count <= 3:
+			x = ast.literal_eval(line[1])
 
-		if count == 0:   tpsMeanRand.append(x[0]*i) 
-		elif count == 1: tpsStdRand.append(float(line[1]))
-		elif count == 2: LatMeanRand.append(x[0])
-		elif count == 3: LatStdRand.append(float(line[1]))
-		count += 1
+			if count == 0:   tpsMeanRand.append(x[0]*i) 
+			elif count == 1: tpsStdRand.append(float(line[1]))
+			elif count == 2: LatMeanRand.append(x[0])
+			elif count == 3: LatStdRand.append(float(line[1]))
+			count += 1
 
 #fullcross
-filename = "percentage/Clever_"
+filename = "percentage/clever"
 clevtpsMean = []
 clevtpsStd  = []
 clevLatMean = []
@@ -355,7 +359,7 @@ for i in range(minSh, maxSh):
 		elif count == 3: clevLatStd.append(float(line[1]))
 		count += 1
 #fullcross
-filename = "percentage/Random_"
+filename = "percentage/random"
 randtpsMean = []
 randtpsStd  = []
 randLatMean = []
@@ -380,15 +384,15 @@ for i in range(minSh, maxSh):
 #### fullcross ####
 
 asymetricerrorStd = [clevtpsStd, clevtpsStd]
-
 x = list(range(minSh, maxSh))
+x = [elem+0.03 for elem in x]#list(range(minSh, maxSh))
 y = clevtpsMean
 print(x)
 print(y)
 fig, (ax0, ax1) = plt.subplots(nrows=2, sharex=True)
 ax0.errorbar(x, y, yerr=asymetricerrorStd, fmt='-o', label = "clever")
-ax0.set_ylabel("Tps [s]")
-ax0.set_title("Graph done with 2 inputs and 2 outputs")
+ax0.set_ylabel("Tps")
+ax0.set_title("Graph representing the evolution of the mean Tps and\n latencies in function of the number of shards")
 ax0.grid(True, which = "both")
 
 
@@ -420,8 +424,8 @@ x = list(range(minSh, maxSh))
 y = tpsMean
 
 ax0.errorbar(x, y, yerr=asymetricerrorStd, fmt='-o', label = "fullcross")
-ax0.set_ylabel("Tps [s]")
-ax0.set_title("Graph done with 2 inputs and 2 outputs")
+ax0.set_ylabel("Tps")
+ax0.set_title("Graph representing the evolution of the mean Tps and\n latencies in function of the number of shards")
 ax0.grid(True, which = "both")
 
 
@@ -447,6 +451,6 @@ ax1.errorbar(x, y, yerr=asymetricerrorLatencyRand, fmt='-x', label = "nocross")
 
 
 ax0.legend()
-ax1.legend()
+#ax1.legend()
 
 plt.savefig("Graphperc_var_nbrShard.png")

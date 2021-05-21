@@ -352,7 +352,7 @@ class ChainspaceNetwork(object):
 		os.system('rm '+directory+'/chainspacecore/ChainSpaceClientConfig/test_transactions.txt')
 		os.system('python ' + directory + '/contrib/core-tools/generate_transactions.py' + ' ' + num_shards + ' ' + num_transactions + ' ' + num_inputs + ' ' + num_outputs + ' ' + directory + '/chainspacecore/ChainSpaceClientConfig/' + ' ' + input_object_mode + ' ' + create_dummy_objects + ' ' + num_dummy_objects + ' ' + output_object_mode+' '+shardListPath)
 		
-
+		
 		transactions = open(directory + '/chainspacecore/ChainSpaceClientConfig/test_transactions.txt').read().splitlines()
 		transactions_per_client = len(transactions) / len(self.clients)
 
@@ -362,7 +362,7 @@ class ChainspaceNetwork(object):
 			#command = 'printf \'' + data + '\' > ' + directory + '/chainspacecore/ChainSpaceClientConfig/test_transactions.txt;'
 			command = 'printf \'' + data + '\' > ' + '/home/admin/chainspace/chainspacecore/ChainSpaceClientConfig/test_transactions.txt;'
 			self._single_ssh_exec(client, command)
-			
+		
 		# transactions = open(directory + '/chainspacecore/ChainSpaceClientConfig/test_transactions.txt').read().splitlines()
 		# transactions_per_client = len(transactions) / len(self.clients)
 		# #data = '\\n'.join([transactions.pop() for i in range(transactions_per_client)])
@@ -376,6 +376,9 @@ class ChainspaceNetwork(object):
 		# 	x[clienti] = x[clienti] + line+"\n"
 		# 	i+=1
 		# i = 0
+		# print("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+		# print(x[1])
+		# #time.sleep(5)
 		# for client in self.clients:
 		# 	print("eeeeeeeeeeeeee")
 		# 	print(i)
@@ -390,6 +393,7 @@ class ChainspaceNetwork(object):
 		# 	self._single_ssh_exec(client, command)
 
 	def send_transactions(self, batch_size, batch_sleep):
+		#command = 'python -c \'from chainspaceapi import ChainspaceClient; client = ChainspaceClient(); client.send_transactions_from_file({0}, {1})\''.format(30, 1)#batch_size
 		command = 'python -c \'from chainspaceapi import ChainspaceClient; client = ChainspaceClient(); client.send_transactions_from_file({0}, {1})\''.format(batch_size, batch_sleep)#batch_size
 		self.ssh_exec_in_clients(command)
 

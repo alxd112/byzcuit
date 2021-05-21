@@ -41,7 +41,7 @@ class Tester(object):
         network.clean_state_core(SHARD)
 
     def start_clients(self):
-        self.network.config_clients(len(self.network.shards)*8)
+        self.network.config_clients(len(self.network.shards)*8)#8 attention
         #self.network.config_clients(1)
 
         n.start_clients()
@@ -559,12 +559,16 @@ if __name__ == '__main__':
         #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/CreateFakeTrans/noFullCross/'+shardListPath
         #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/CreateFakeTrans/fullCross_inp/'+shardListPath
         
-        #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/CreateFakeTrans/percentage/'+shardListPath
+        shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/CreateFakeTrans/percentage/'+shardListPath
 
         #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/Transactions/range_300k_300200/'+shardListPath
         #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/Transactions/range_300k_300100/Random/'+shardListPath
-        shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/Transactions/range_300k_300100/mode5/Clever/'+shardListPath
+        #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/Transactions/range_300k_300100/mode5/Clever/'+shardListPath
         #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/Transactions/range_300k_300100/mode5/Random/'+shardListPath
+
+        #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/Transactions/range_300k_300300/Clever/'+shardListPath
+        #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/Transactions/range_300k_300200/Random/'+shardListPath
+
 
         #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/Transactions/range_300k_300100/Clever/'+shardListPath
         #shardListPath = '/home/alexandre/Desktop/test_aws/try3withenvi/byzcuit/chainspacemeasurements/chainspacemeasurements/Transactions/range_300k_300100/CleverNT/'+shardListPath

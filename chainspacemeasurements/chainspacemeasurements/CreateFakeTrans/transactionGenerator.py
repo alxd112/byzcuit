@@ -13,7 +13,7 @@ import reader
 #############
 
 
-User = "Max" 				# Set to anything except "Max" when Alexandre is running the program, "Max" is when Maxime is running it
+User = "ax" 				# Set to anything except "Max" when Alexandre is running the program, "Max" is when Maxime is running it
 if(User == "Max"):
 	path = "/media/maxime/My Passport/MasterThesis/blocks"
 	path2 = '/home/maxime/Documents/Mémoire'
@@ -22,9 +22,9 @@ else:
 	path = "/media/alexandre/AlexLinux/blockchain/blocks"
 	path2 = '/home/alexandre/Desktop/thesis'
 
-percentageCross = 0.6 	# desired proportion of cross shard transactions (= cross shard edges in this case)
+percentageCross = 0.2830 	# desired proportion of cross shard transactions (= cross shard edges in this case)
 nbrTrans = 100000	# total number of transactions desired
-nbrShards = 3			# number of shards in the network
+nbrShards = 2			# number of shards in the network
 
 fileToWrite = open(path2 + "/UTXO_Graph_Analysis/Implem/ChainSpaceMeasures/ArtificialTrans/Trans" + str(nbrTrans) + "Cross" + str(percentageCross) + ".txt", "w+")
 text = ""
