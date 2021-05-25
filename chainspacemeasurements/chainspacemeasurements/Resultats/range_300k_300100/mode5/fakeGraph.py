@@ -81,7 +81,7 @@ asymetricerrorStd = [tpsStd, tpsStd]
 x = shardList
 y = tpsMean
 fig, (ax0, ax1) = plt.subplots(nrows=2, sharex=True)
-ax0.errorbar(x, y, yerr=asymetricerrorStd, fmt='-o', label = "Clever")
+ax0.errorbar(x, y, yerr=asymetricerrorStd, fmt='-o', label = "DAVIS")
 ax0.set_ylabel("Tps")
 ax0.set_title("Evolution of the tps and latency in function of the nbr of shards")
 ax0.grid(True, which = "both")
@@ -89,7 +89,7 @@ ax0.grid(True, which = "both")
 
 y = LatMean
 asymetricerrorLatency = [LatStd, LatStd]
-ax1.errorbar(x, y, yerr=asymetricerrorLatency, fmt='-o', label = "Clever" )
+ax1.errorbar(x, y, yerr=asymetricerrorLatency, fmt='-o', label = "DAVIS" )
 ax1.set_ylabel("Latency[ms]")
 ax1.set_xlabel("Number of shards")
 ax1.grid(True, which = "both")
@@ -125,7 +125,7 @@ ax[0].set_title("Distribution of the tps in function of the number of shard used
 for row in range(rows):
 	nbr = len(allTps[shardList[row]-1][0])
 	y = [0]*nbr
-	ax[row].scatter(allTps[shardList[row]-1][0], y, label = 'clever')
+	ax[row].scatter(allTps[shardList[row]-1][0], y, label = 'DAVIS')
 	ax[row].set_ylabel('shard:'+str(shardList[row]))
 
 	
@@ -174,7 +174,7 @@ rcrossEdge = [49.81, 66.23, 75.14, 80.37, 83.37, 84.93, 87.93, 88.59, 90.14]
 rcrossTran = [59.79, 66.23, 75.14, 85.39, 88.09, 89.74, 90.91, 92.12, 92.94]
 
 fig, (ax0, ax1) = plt.subplots(nrows=2, sharex=True)
-ax0.plot(shardList, crossTran, label = "Clever cross trans")
+ax0.plot(shardList, crossTran, label = "DAVIS cross trans")
 ax0.plot(shardList, rcrossTran, label = "Random cross trans")
 
 ax0.set_ylabel("Percentage [%]")
@@ -182,7 +182,7 @@ ax0.set_title("Evolution of the Percentage of cross transactions\n and cross edg
 ax0.grid(True, which = "both")
 
 
-ax1.plot(shardList, crossEdge, label = "Clever cross edges" )
+ax1.plot(shardList, crossEdge, label = "DAVIS cross edges" )
 ax1.plot(shardList, rcrossEdge, label = "Random cross edges" )
 
 ax1.set_ylabel("Percentage [%]")
